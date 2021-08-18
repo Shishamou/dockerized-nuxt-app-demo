@@ -1,0 +1,12 @@
+version: "3.9"
+
+services:
+  dev:
+    image: "node:16-alpine"
+    build:
+      context: .
+      dockerfile: ./.docker/dev/Dockerfile
+    volumes:
+      - ".:/var/www:cached"
+    ports:
+      - "3000:3000"
