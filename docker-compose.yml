@@ -2,11 +2,18 @@ version: "3.9"
 
 services:
   dev:
+    container_name: "app"
     image: "node:16-alpine"
-    build:
-      context: .
-      dockerfile: ./.docker/dev/Dockerfile
     volumes:
-      - ".:/var/www:cached"
+      - ".:/app:cached"
     ports:
       - "3000:3000"
+    entrypoint: [ "/bin/sh" , "-c" ]
+    command:
+      - |
+        cd /app
+        yarn
+        npm run dev
+    environment:
+      NUXT_HOST: "0.0.0.0"
+      NUXT_PORT: 3000
