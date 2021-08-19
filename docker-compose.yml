@@ -2,14 +2,12 @@ version: "3.9"
 
 services:
   dev:
-    container_name: "app"
-    image: "node:16-alpine"
+    container_name: "dev"
+    build:
+      context: .
+      dockerfile: .docker/dev/Dockerfile
     volumes:
       - ".:/app"
       - /app/node_modules
     ports:
       - "3000:3000"
-    entrypoint: [ "npm", "run", "dev" ]
-    environment:
-      NUXT_HOST: "0.0.0.0"
-      NUXT_PORT: 3000
