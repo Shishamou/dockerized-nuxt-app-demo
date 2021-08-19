@@ -5,15 +5,11 @@ services:
     container_name: "app"
     image: "node:16-alpine"
     volumes:
-      - ".:/app:cached"
+      - ".:/app"
+      - /app/node_modules
     ports:
       - "3000:3000"
-    entrypoint: [ "/bin/sh" , "-c" ]
-    command:
-      - |
-        cd /app
-        yarn
-        npm run dev
+    entrypoint: [ "npm", "run", "dev" ]
     environment:
       NUXT_HOST: "0.0.0.0"
       NUXT_PORT: 3000
